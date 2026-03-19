@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 {% block content %}
@@ -55,4 +56,63 @@
         {% endfor %}
     </tbody>
 </table>
+=======
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Mis materiales</h1>
+<a href="{{ url_for('upload_material') }}" class="btn btn-primary mb-3">Subir nuevo material</a>
+
+<h3>Mis archivos</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Materia</th>
+            <th>Descripción</th>
+            <th>Archivo</th>
+            <th>Subido</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for material in own_materials %}
+        <tr>
+            <td>{{ material.subject.name }}</td>
+            <td>{{ material.description }}</td>
+            <td><a href="{{ url_for('uploaded_file', filename=material.filename) }}" target="_blank">Ver</a></td>
+            <td>{{ material.uploaded_at.strftime('%d/%m/%Y %H:%M') }}</td>
+            <td>
+                <a href="{{ url_for('delete_material', id=material.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No has subido materiales.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Materiales públicos de otros usuarios</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Materia</th>
+            <th>Descripción</th>
+            <th>Archivo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for material in public_materials %}
+        <tr>
+            <td>{{ material.user.username }}</td>
+            <td>{{ material.subject.name }}</td>
+            <td>{{ material.description }}</td>
+            <td><a href="{{ url_for('uploaded_file', filename=material.filename) }}" target="_blank">Ver</a></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">No hay materiales públicos disponibles.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+>>>>>>> 1831aced1e3995dba937dd3ca4e073be80bc02b5
 {% endblock %}

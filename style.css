@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     transition: background-color 0.3s, color 0.3s;
 }
@@ -13,4 +14,21 @@ body {
 }
 .card:hover {
     transform: scale(1.02);
+=======
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+[data-bs-theme="dark"] {
+    background-color: #1e1e1e;
+    color: #f8f9fa;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.card {
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: scale(1.02);
+>>>>>>> 1831aced1e3995dba937dd3ca4e073be80bc02b5
 }
