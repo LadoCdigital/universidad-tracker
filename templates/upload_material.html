@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Subir material</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.subject_id.label(class="form-label") }}
+        {{ form.subject_id(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.file.label(class="form-label") }}
+        {{ form.file(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Subir</button>
+</form>
+{% endblock %}

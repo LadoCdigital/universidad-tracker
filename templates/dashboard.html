@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Bienvenido, {{ current_user.username }}</h1>
+<p>Carrera: {{ current_user.career|capitalize }}</p>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Materias</h5>
+                <p class="card-text display-6">{{ subjects_count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Materiales</h5>
+                <p class="card-text display-6">{{ materials_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Próximos exámenes</div>
+            <ul class="list-group list-group-flush">
+                {% for exam in upcoming_exams %}
+                    <li class="list-group-item">{{ exam.subject.name }} - {{ exam.type }} - {{ exam.date.strftime('%d/%m/%Y') }}</li>
+                {% else %}
+                    <li class="list-group-item">No hay exámenes próximos</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Próximos eventos</div>
+            <ul class="list-group list-group-flush">
+                {% for event in upcoming_events %}
+                    <li class="list-group-item">{{ event.title }} - {{ event.date.strftime('%d/%m/%Y') }}</li>
+                {% else %}
+                    <li class="list-group-item">No hay eventos próximos</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">Próximos recordatorios</div>
+            <ul class="list-group list-group-flush">
+                {% for reminder in upcoming_reminders %}
+                    <li class="list-group-item">{{ reminder.title }} - {{ reminder.datetime.strftime('%d/%m/%Y %H:%M') }}</li>
+                {% else %}
+                    <li class="list-group-item">No hay recordatorios próximos</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Tareas pendientes</div>
+            <ul class="list-group list-group-flush">
+                {% for task in pending_tasks %}
+                    <li class="list-group-item">{{ task.title }} - Vence: {{ task.due_date.strftime('%d/%m/%Y') if task.due_date else 'Sin fecha' }}</li>
+                {% else %}
+                    <li class="list-group-item">No hay tareas pendientes</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

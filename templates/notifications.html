@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Notificaciones</h1>
+<ul class="list-group">
+    {% for notif in notifications %}
+        <li class="list-group-item {% if not notif.read %}list-group-item-info{% endif %}">
+            {{ notif.message }}
+            <small>{{ notif.created_at.strftime('%d/%m/%Y %H:%M') }}</small>
+            {% if not notif.read %}
+                <a href="{{ url_for('mark_notification_read', id=notif.id) }}" class="btn btn-sm btn-success float-end">Marcar como leída</a>
+            {% endif %}
+        </li>
+    {% else %}
+        <li class="list-group-item">No hay notificaciones.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.datetime.label(class="form-label") }}
+        {{ form.datetime(class="form-control", placeholder="YYYY-MM-DD HH:MM") }}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form.recurring(class="form-check-input") }}
+        {{ form.recurring.label(class="form-check-label") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('reminders') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

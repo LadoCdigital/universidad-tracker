@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Mis materias</h1>
+<a href="{{ url_for('new_subject') }}" class="btn btn-primary mb-3">Nueva materia</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Plan de estudios</th>
+            <th>Programa cursado</th>
+            <th>Programa examen</th>
+            <th>Público</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{ subject.name }}</td>
+            <td>
+                {% if subject.study_plan %}
+                    <a href="{{ url_for('uploaded_file', filename='uploads/' + subject.study_plan) }}" target="_blank">Ver</a>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>
+                {% if subject.course_program %}
+                    <a href="{{ url_for('static', filename='uploads/' + subject.course_program) }}" target="_blank">Ver</a>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>
+                {% if subject.exam_program %}
+                    <a href="{{ url_for('uploaded_file', filename='uploads/' + subject.exam_program) }}" target="_blank">Ver</a>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ url_for('toggle_subject_public', id=subject.id) }}" class="btn btn-sm {{ 'btn-success' if subject.is_public else 'btn-secondary' }}">
+                    {{ 'Público' if subject.is_public else 'Privado' }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ url_for('edit_subject', id=subject.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{{ url_for('delete_subject', id=subject.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6">No hay materias registradas.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

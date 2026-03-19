@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+env/
+
+# Base de datos
+*.db
+*.db-journal
+instance/
+
+# Archivos subidos por usuarios
+uploads/
+!uploads/.gitkeep
+
+# Backups
+backups/
+
+# IDE
+.vscode/
+.idea/
+
+# Archivos del sistema
+Thumbs.db
+.DS_Store

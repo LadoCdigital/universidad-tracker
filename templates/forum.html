@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Foro</h1>
+<a href="{{ url_for('new_topic') }}" class="btn btn-primary mb-3">Nuevo tema</a>
+
+<ul class="list-group">
+    {% for topic in topics %}
+        <li class="list-group-item">
+            <a href="{{ url_for('view_topic', id=topic.id) }}">{{ topic.title }}</a>
+            <small>por {{ topic.author.username }} el {{ topic.created_at.strftime('%d/%m/%Y') }}</small>
+        </li>
+    {% else %}
+        <li class="list-group-item">No hay temas aún.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

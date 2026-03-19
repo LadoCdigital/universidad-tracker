@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.study_plan.label(class="form-label") }}
+        {{ form.study_plan(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.course_program.label(class="form-label") }}
+        {{ form.course_program(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.exam_program.label(class="form-label") }}
+        {{ form.exam_program(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('subjects') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

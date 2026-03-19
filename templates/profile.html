@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Perfil de {{ current_user.username }}</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.username.label(class="form-label") }}
+        {{ form.username(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.email.label(class="form-label") }}
+        {{ form.email(class="form-control") }}
+    </div>
+    <div class="mb-3">
+        {{ form.career.label(class="form-label") }}
+        {{ form.career(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.profile_pic.label(class="form-label") }}
+        {{ form.profile_pic(class="form-control") }}
+        {% if current_user.profile_pic %}
+            <img src="{{ url_for('uploaded_file', filename=current_user.profile_pic) }}" width="100" class="mt-2">
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+{% endblock %}

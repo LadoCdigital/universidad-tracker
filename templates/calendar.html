@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Calendario</h1>
+<a href="{{ url_for('new_event') }}" class="btn btn-primary mb-3">Nuevo evento</a>
+
+<h3>Eventos</h3>
+<ul class="list-group">
+    {% for event in events %}
+        <li class="list-group-item">
+            {{ event.date.strftime('%d/%m/%Y') }} - {{ event.title }}
+            <a href="{{ url_for('delete_event', id=event.id) }}" class="btn btn-sm btn-danger float-end" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+        </li>
+    {% else %}
+        <li class="list-group-item">No hay eventos.</li>
+    {% endfor %}
+</ul>
+
+<h3 class="mt-4">Exámenes</h3>
+<ul class="list-group">
+    {% for exam in exams %}
+        <li class="list-group-item">
+            {{ exam.date.strftime('%d/%m/%Y') }} - {{ exam.subject.name }} ({{ exam.type }})
+        </li>
+    {% else %}
+        <li class="list-group-item">No hay exámenes.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

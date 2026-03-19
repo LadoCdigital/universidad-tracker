@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Recordatorios</h1>
+<a href="{{ url_for('new_reminder') }}" class="btn btn-primary mb-3">Nuevo recordatorio</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Fecha y hora</th>
+            <th>Recurrente</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reminder in reminders %}
+        <tr>
+            <td>{{ reminder.title }}</td>
+            <td>{{ reminder.description }}</td>
+            <td>{{ reminder.datetime.strftime('%d/%m/%Y %H:%M') }}</td>
+            <td>{{ 'Sí' if reminder.recurring else 'No' }}</td>
+            <td>
+                <a href="{{ url_for('delete_reminder', id=reminder.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No hay recordatorios.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

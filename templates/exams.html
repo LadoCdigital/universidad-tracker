@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Mis exámenes</h1>
+<a href="{{ url_for('new_exam') }}" class="btn btn-primary mb-3">Nuevo examen</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Materia</th>
+            <th>Tipo</th>
+            <th>Fecha</th>
+            <th>Nota</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exam in exams %}
+        <tr>
+            <td>{{ exam.subject.name }}</td>
+            <td>{{ exam.type }}</td>
+            <td>{{ exam.date.strftime('%d/%m/%Y') }}</td>
+            <td>{{ exam.grade if exam.grade else 'Pendiente' }}</td>
+            <td>
+                <a href="{{ url_for('edit_exam', id=exam.id) }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{{ url_for('delete_exam', id=exam.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar?')">Eliminar</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5">No hay exámenes registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

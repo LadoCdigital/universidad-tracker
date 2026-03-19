@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.subject_id.label(class="form-label") }}
+        {{ form.subject_id(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.type.label(class="form-label") }}
+        {{ form.type(class="form-select") }}
+    </div>
+    <div class="mb-3">
+        {{ form.date.label(class="form-label") }}
+        {{ form.date(class="form-control", type="date") }}
+    </div>
+    <div class="mb-3">
+        {{ form.grade.label(class="form-label") }}
+        {{ form.grade(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ url_for('exams') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
